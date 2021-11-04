@@ -68,6 +68,7 @@ function tainacan_blocks_register_categories($categories, $editor_context) {
  */
 function tainacan_blocks_register_and_enqueue_all_blocks() {
 	tainacan_blocks_get_category_icon_script();
+	tainacan_blocks_get_query_hook_script();
 	tainacan_blocks_get_common_editor_styles();
 
 	foreach(TAINACAN_BLOCKS as $block_slug => $block_options) {
@@ -243,4 +244,22 @@ function tainacan_blocks_get_category_icon_script() {
 		array('wp-blocks'),
 		$TAINACAN_VERSION
 	);
+}
+
+/** 
+ * Registers the script adds a filter to change the edit post on query block with Tainacan post types
+ */
+function tainacan_blocks_get_query_hook_script() {
+	global $TAINACAN_BASE_URL;
+	global $TAINACAN_VERSION;
+	
+	wp_enqueue_script(
+		'tainacan-blocks-query-hook',
+		$TAINACAN_BASE_URL . '/assets/js/tainacan_blocks_query_hook.js',
+		array('wp-blocks', 'wp-compose', 'wp-element', 'wp-url', 'wp-editor', 'wp-hooks', 'wp-i18n'),
+		$TAINACAN_VERSION
+	);
+
+	$block_settings = tainacan_blocks_get_plugin_js_settings();
+	wp_localize_script( 'tainacan-blocks-query-hook', 'tainacan_blocks', $block_settings);
 }

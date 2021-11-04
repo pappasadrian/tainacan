@@ -61,6 +61,49 @@ export default {
                     }
                 );
             },
+        },
+        {
+            type: 'block',
+            blocks: [ 'core/query' ],
+            transform: ( {
+                items,
+                collectionId,
+                collection,
+                showName,
+                gridMargin,
+                searchURL,
+                maxItemsNumber,
+                selectedItems,
+                loadStrategy,
+                showCollectionHeader,
+                showCollectionLabel,
+                collectionBackgroundColor,
+                collectionTextColor,
+                maxColumnsCount,
+                cropImagesToSquare,
+                align,
+                textColor,
+                fontSize
+            } ) => {
+                return createBlock(
+                    'core/query',
+                    {
+                        query: {
+                            postType: 'tnc_col_' + collectionId + '_item',
+                            perPage: maxItemsNumber,
+                            pages: 1,
+                            offset: 0,
+                            categoryIds: [],
+                            tagIds: [],
+                            order: 'desc',
+                            orderBy: 'date',
+                            author: '',
+                            search: '',
+                            inherit: false
+                        }
+                    }
+                );
+            },
         }
     ]
 };

@@ -1,6 +1,7 @@
 const { registerBlockType } = wp.blocks;
 const { __ } = wp.i18n;
 
+
 // Converts non-localized block metadata info to localized ones, for WP versions older than 5.8
 function tainacanBlocksLocalizeMetadata(metadata) {
 
